@@ -1,0 +1,26 @@
+{
+  "name": "recycle2feed-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AWS-Powered Smart Recycling, Food Assistance, and Animal Welfare System",
+  "scripts": {
+    "test": "npm --prefix backend test",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "backend:dev": "npm --prefix backend run dev",
+    "backend:start": "npm --prefix backend start",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:preview": "npm --prefix frontend run preview"
+  },
+  "keywords": [
+    "aws",
+    "serverless",
+    "recycling",
+    "iot",
+    "animal-welfare",
+    "dynamodb",
+    "lambda",
+    "sam"
+  ],
+  "author": "ReCycle2Feed Builders",
+  "license": "MIT"
+}
