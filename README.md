@@ -5,9 +5,12 @@
 [![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF.svg?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Styles-Tailwind%20CSS-38B2AC.svg?logo=tailwind-css)](https://tailwindcss.com/)
 [![Tests](https://img.shields.io/badge/Tests-14%2F14%20Passing-brightgreen.svg)](https://vitest.dev/)
+[![Demo Video](https://img.shields.io/badge/Demo%20Video-YouTube-red.svg?logo=youtube)](https://youtu.be/KCqz4FkRvRI)
 [![Tour](https://img.shields.io/badge/Bharat%20Builds%20Tour-Event%2002%3A%20Environmental%20Hacks-forest.svg)](https://www.wemakedevs.org/aws/env)
 
 An intelligent, AWS-powered smart reverse-vending and social reward platform designed for the **Waste and Energy** track of the **Bharat Builds Tour / Environmental Hacks 2026** (by WeMakeDevs & AWS).
+
+> 📺 **Watch the 3-Minute Hackathon Demo Video:** [https://youtu.be/KCqz4FkRvRI](https://youtu.be/KCqz4FkRvRI)
 
 ---
 

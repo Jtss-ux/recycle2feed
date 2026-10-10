@@ -9,6 +9,7 @@
 
 ## Ready-to-Copy YouTube Submission Metadata
 
+* **Live YouTube Video Link:** https://youtu.be/KCqz4FkRvRI
 * **Video Title:** `ReCycle2Feed — Turn Waste Into Care | Environmental Hacks 2026 (Bharat Builds Tour)`
 * **Video Privacy:** `Unlisted` or `Public` *(Per tour rules: verify link opens in signed-out browser!)*
 * **Video Description:**
