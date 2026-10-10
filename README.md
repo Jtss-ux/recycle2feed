@@ -123,7 +123,7 @@ flowchart TD
 
 ### Step 1: Clone and install dependencies
 ```bash
-git clone https://github.com/wemakedevs/recycle2feed.git
+git clone https://github.com/Jtss-ux/recycle2feed.git
 cd recycle2feed
 
 # Install backend dependencies
