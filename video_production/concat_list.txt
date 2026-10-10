@@ -1,0 +1,7 @@
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_01.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_02.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_03.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_04.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_05.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_06.mp4'
+file 'C:/Users/JTS/Documents/antigravity/lively-brahmagupta/video_production/scene_07.mp4'
