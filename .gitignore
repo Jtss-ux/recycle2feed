@@ -32,3 +32,8 @@ Thumbs.db
 # Scratch & test logs
 scratch/
 *.log
+
+# Video production intermediate files
+video_production/*.wav
+video_production/*.png
+video_production/*.mp4
