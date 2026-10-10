@@ -1,0 +1,20 @@
+version: '3.8'
+
+# ==============================================================================
+# ReCycle2Feed - LocalStack (AWS Open-Source Emulation) Configuration
+# Enables offline local testing of DynamoDB & API Gateway without AWS credentials
+# ==============================================================================
+
+services:
+  localstack:
+    container_name: recycle2feed-localstack
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"            # LocalStack edge port
+    environment:
+      - SERVICES=dynamodb,apigateway,lambda
+      - AWS_DEFAULT_REGION=ap-south-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

@@ -170,6 +170,50 @@ export const ImpactPage: React.FC = () => {
         </p>
       </div>
 
+      {/* Unit Economics & Circular Feasibility Model (Business Analytics) */}
+      <div className="bg-white border border-charcoal-border rounded-xl p-6 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-charcoal-border pb-3">
+          <div>
+            <h3 className="text-base font-bold text-charcoal flex items-center gap-2">
+              <Scale className="w-5 h-5 text-emerald-700" />
+              Circular Feasibility & Unit Economics Model (BBA Business Analytics)
+            </h3>
+            <p className="text-xs text-charcoal-muted mt-0.5">
+              Financial and logistical validation for sustainable campus and municipal deployments.
+            </p>
+          </div>
+          <span className="text-[11px] font-mono bg-emerald-50 text-emerald-900 border border-emerald-200 px-2.5 py-1 rounded-full w-fit">
+            Breakeven Metric: Verified
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
+          <div className="p-3.5 rounded-lg bg-paper-50 border border-charcoal-border space-y-1">
+            <span className="text-charcoal-muted block">Crushed PET Scrap Value</span>
+            <span className="text-base font-bold text-charcoal">₹35 – ₹42 / kg</span>
+            <p className="text-[10px] text-charcoal-muted font-sans">High-purity source segregated #1 PET scrap benchmark (Delhi NCR).</p>
+          </div>
+
+          <div className="p-3.5 rounded-lg bg-paper-50 border border-charcoal-border space-y-1">
+            <span className="text-charcoal-muted block">Crushed Aluminium Scrap</span>
+            <span className="text-base font-bold text-emerald-700">₹105 – ₹115 / kg</span>
+            <p className="text-[10px] text-charcoal-muted font-sans">Beverage can scrap commands immediate metal recycler buyback.</p>
+          </div>
+
+          <div className="p-3.5 rounded-lg bg-paper-50 border border-charcoal-border space-y-1">
+            <span className="text-charcoal-muted block">Feed Cost per 20g Portion</span>
+            <span className="text-base font-bold text-charcoal">~₹1.70 / portion</span>
+            <p className="text-[10px] text-charcoal-muted font-sans">Based on wholesale bulk procurement at ₹85/kg institutional rate.</p>
+          </div>
+
+          <div className="p-3.5 rounded-lg bg-paper-50 border border-charcoal-border space-y-1">
+            <span className="text-charcoal-muted block">Sponsor / CSR Co-Pay</span>
+            <span className="text-base font-bold text-forest-deep">₹12,000 / month</span>
+            <p className="text-[10px] text-charcoal-muted font-sans">Pet care & consumer brands sponsor kiosk casing and feeding budget.</p>
+          </div>
+        </div>
+      </div>
+
       {/* Visual Activity & Breakdown Grids */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Material Category Breakdown */}

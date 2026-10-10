@@ -275,6 +275,9 @@ export const KioskPage: React.FC = () => {
               <h2 className="text-3xl sm:text-4xl font-extrabold text-charcoal tracking-tight">
                 Turn Waste Into Care.
               </h2>
+              <p className="text-sm font-semibold text-forest-deep">
+                कचरे से देखभाल की ओर • स्वच्छ परिसर, सुरक्षित आहार
+              </p>
 
               <p className="text-base text-charcoal-muted leading-relaxed max-w-lg mx-auto">
                 Recycle an eligible bottle or can. Help build a cleaner environment and support responsible, measured community feeding.
@@ -308,7 +311,7 @@ export const KioskPage: React.FC = () => {
                 onClick={() => setCurrentStep(2)}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-forest-deep text-white font-bold text-base shadow-md hover:bg-forest-card transition-all active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                <span>Deposit Recyclable Item</span>
+                <span>Deposit Recyclable Item / बोतल डालें</span>
                 <ArrowRight className="w-5 h-5 text-emerald-300" />
               </button>
 
