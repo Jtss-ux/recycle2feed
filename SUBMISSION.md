@@ -8,6 +8,7 @@
 * **Project Name:** ReCycle2Feed
 * **Tagline:** Turn Waste Into Care.
 * **Project Repository:** https://github.com/Jtss-ux/recycle2feed
+* **Interactive Live Demo:** https://jtss-ux.github.io/recycle2feed/
 * **Demo Video (YouTube):** https://youtu.be/KCqz4FkRvRI
 * **Demo Video File:** `recycle2feed_demo_video.mp4` (Included directly in repository root; 2m 48s Full HD 1080p)
 
