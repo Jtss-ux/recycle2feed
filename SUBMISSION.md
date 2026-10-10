@@ -8,9 +8,8 @@
 * **Project Name:** ReCycle2Feed
 * **Tagline:** Turn Waste Into Care.
 * **Category:** Smart Waste Segregation, Circular Economy, IoT, Cloud Computing, Community Animal Welfare
-* **Primary Competition Track:** Waste and Energy — Environmental Hacks 2026
-* **Project Repository:** `https://github.com/wemakedevs/recycle2feed` *(or team repo)*
-* **Demo Video Link:** *(3-minute YouTube recording following docs/demo-script.md)*
+* **Project Repository:** https://github.com/Jtss-ux/recycle2feed
+* **Demo Video File:** `recycle2feed_demo_video.mp4` (Included directly in repository root; 2m 48s Full HD 1080p)
 
 ---
 
