@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  ReCycle2Feed - Serverless Smart Recycling, Food Assistance & Animal Welfare Platform
+  Event 02: Environmental Hacks (Bharat Builds Tour 2026)
+
+Globals:
+  Function:
+    Timeout: 15
+    MemorySize: 512
+    Runtime: nodejs20.x
+    Architectures:
+      - arm64
+    LoggingConfig:
+      LogFormat: JSON
+
+Resources:
+  # ==============================================================================
+  # API GATEWAY HTTP API
+  # ==============================================================================
+  HttpApiGateway:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+          - x-api-key
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        MaxAge: 600
+
+  # ==============================================================================
+  # CORE LAMBDA FUNCTION (Routes all /api/* requests)
+  # ==============================================================================
+  ReCycle2FeedFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../backend/
+      Handler: dist/lambdaAdapter.handler
+      Environment:
+        Variables:
+          APP_MODE: AWS
+          DYNAMODB_TRANSACTIONS_TABLE: !Ref TransactionsTable
+          DYNAMODB_MACHINES_TABLE: !Ref MachinesTable
+          DYNAMODB_MAINTENANCE_TABLE: !Ref MaintenanceTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TransactionsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MachinesTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MaintenanceTable
+      Events:
+        ApiProxy:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApiGateway
+            Path: /{proxy+}
+            Method: ANY
+        ApiRoot:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApiGateway
+            Path: /
+            Method: ANY
+
+  # ==============================================================================
+  # DYNAMODB TABLES
+  # ==============================================================================
+  TransactionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: recycle2feed-transactions-prod
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: eventId
+          AttributeType: S
+        - AttributeName: machineId
+          AttributeType: S
+        - AttributeName: dateKey
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: eventId
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: MachineTransactionsIndex
+          KeySchema:
+            - AttributeName: machineId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: DateKeyTransactionsIndex
+          KeySchema:
+            - AttributeName: dateKey
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  MachinesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: recycle2feed-machines-prod
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: machineId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: machineId
+          KeyType: HASH
+
+  MaintenanceTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: recycle2feed-maintenance-prod
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: maintenanceId
+          AttributeType: S
+        - AttributeName: machineId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: maintenanceId
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: MachineMaintenanceIndex
+          KeySchema:
+            - AttributeName: machineId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+Outputs:
+  ApiEndpoint:
+    Description: HTTP API Gateway endpoint base URL
+    Value: !Sub "https://${HttpApiGateway}.execute-api.${AWS::Region}.amazonaws.com"
+  TransactionsTableName:
+    Description: DynamoDB Transactions Table Name
+    Value: !Ref TransactionsTable
+  MachinesTableName:
+    Description: DynamoDB Machines Table Name
+    Value: !Ref MachinesTable
+  MaintenanceTableName:
+    Description: DynamoDB Maintenance Table Name
+    Value: !Ref MaintenanceTable

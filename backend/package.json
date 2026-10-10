@@ -1,0 +1,26 @@
+{
+  "name": "recycle2feed-backend",
+  "version": "1.0.0",
+  "description": "AWS Serverless backend and local simulation runtime for ReCycle2Feed",
+  "main": "dist/lambdaAdapter.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/localServer.js",
+    "dev": "ts-node src/localServer.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.750.0",
+    "@aws-sdk/lib-dynamodb": "^3.750.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
