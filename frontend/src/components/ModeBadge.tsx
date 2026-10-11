@@ -10,28 +10,31 @@ export const ModeBadge: React.FC = () => {
   return (
     <Link
       to="/settings"
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono border transition-all hover:shadow-sm"
-      style={{
-        backgroundColor: isSim ? '#FEF3C7' : backendHealth.reachable ? '#ECFDF5' : '#FEE2E2',
-        borderColor: isSim ? '#F59E0B' : backendHealth.reachable ? '#10B981' : '#EF4444',
-        color: isSim ? '#92400E' : backendHealth.reachable ? '#065F46' : '#991B1B'
-      }}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono border transition-all hover:scale-[1.02] ${
+        isSim
+          ? 'bg-neon-amber/10 border-neon-amber/50 text-neon-amber hover:shadow-neon-amber'
+          : backendHealth.reachable
+          ? 'bg-neon-cyan/10 border-neon-cyan/50 text-neon-cyan hover:shadow-neon-cyan'
+          : 'bg-neon-red/10 border-neon-red/50 text-neon-red hover:shadow-neon-red'
+      }`}
       title={`Click to configure. Status: ${backendHealth.statusText}`}
     >
       {isSim ? (
         <>
-          <Cpu className="w-3.5 h-3.5 animate-pulse text-amber-600" />
-          <span className="font-semibold uppercase tracking-wider">SIMULATION MODE</span>
-          <span className="text-[10px] hidden sm:inline opacity-75">(In-Browser / Local)</span>
+          <div className="w-2 h-2 rounded-full bg-neon-amber animate-pulse" />
+          <Cpu className="w-3.5 h-3.5 text-neon-amber" />
+          <span className="font-bold tracking-wider">SIMULATION</span>
+          <span className="text-[10px] hidden sm:inline opacity-70 border-l border-neon-amber/30 pl-1.5">LOCAL</span>
         </>
       ) : (
         <>
-          <Cloud className="w-3.5 h-3.5 text-emerald-600" />
-          <span className="font-semibold uppercase tracking-wider">AWS CLOUD MODE</span>
+          <div className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
+          <Cloud className="w-3.5 h-3.5 text-neon-cyan" />
+          <span className="font-bold tracking-wider">AWS CLOUD</span>
           {backendHealth.reachable ? (
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-neon-green" />
           ) : (
-            <AlertCircle className="w-3.5 h-3.5 text-red-600" />
+            <AlertCircle className="w-3.5 h-3.5 text-neon-red" />
           )}
         </>
       )}

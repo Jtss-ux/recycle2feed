@@ -12,7 +12,9 @@ import {
   Activity,
   Layers,
   Save,
-  ShieldAlert
+  ShieldAlert,
+  Terminal,
+  Zap
 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
@@ -45,7 +47,6 @@ export const SettingsPage: React.FC = () => {
   const handleTestConnection = async () => {
     setTestResult({ testing: true, message: 'Pinging backend /api/health...', ok: null });
     try {
-      // Temporarily test the typed URL if testing AWS mode
       if (mode === 'AWS') {
         const res = await fetch(`${baseUrl.trim()}/api/health`);
         if (!res.ok) {
@@ -86,76 +87,76 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 space-y-10">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
-      <div className="border-b border-charcoal-border pb-6 space-y-2">
+      <div className="border-b border-cyber-border pb-6 space-y-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-forest-deep bg-forest-50 px-2.5 py-0.5 rounded border border-forest-200">
-            Configuration
+          <span className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan bg-neon-cyan/10 px-2.5 py-0.5 rounded border border-neon-cyan/30">
+            // RUNTIME CONFIGURATION
           </span>
         </div>
-        <h2 className="text-3xl font-extrabold text-charcoal tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-cyber-text tracking-tight font-mono">
           System & Cloud Runtime Settings
         </h2>
-        <p className="text-sm text-charcoal-muted">
+        <p className="text-xs text-cyber-muted font-mono">
           Configure operating modes, switch between in-browser simulation and live AWS API Gateway endpoints, and manage demo state.
         </p>
       </div>
 
       {savedNotice && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-          <span>Settings saved successfully. Configuration updated.</span>
+        <div className="p-4 rounded-xl bg-neon-green/10 border border-neon-green/40 text-neon-green text-xs font-mono flex items-center gap-2 shadow-neon-green">
+          <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <span>Settings saved successfully. Runtime configuration updated.</span>
         </div>
       )}
 
       {/* Main Settings Form */}
-      <form onSubmit={handleSave} className="bg-white border border-charcoal-border rounded-xl p-6 sm:p-8 space-y-8 shadow-xs">
+      <form onSubmit={handleSave} className="hud-panel rounded-xl p-6 sm:p-8 space-y-8 border border-cyber-border">
         {/* Operating Mode Selector */}
         <div className="space-y-4">
-          <label className="block text-xs font-mono uppercase font-bold text-charcoal">
-            Operating Mode
+          <label className="block text-xs font-mono uppercase font-bold text-cyber-text tracking-wider">
+            // OPERATING MODE SELECTION
           </label>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               type="button"
               onClick={() => setMode('SIMULATION')}
-              className={`p-4 rounded-xl border text-left transition-all ${
+              className={`p-4 rounded-xl border text-left transition-all font-mono ${
                 mode === 'SIMULATION'
-                  ? 'bg-amber-50 border-amber-500 ring-1 ring-amber-500'
-                  : 'bg-white border-charcoal-border hover:bg-paper-100'
+                  ? 'bg-neon-amber/10 border-neon-amber shadow-neon-amber text-cyber-text'
+                  : 'bg-cyber-card border-cyber-border text-cyber-muted hover:text-cyber-text hover:border-cyber-border/80'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-bold text-sm text-charcoal flex items-center gap-2">
-                  <Cpu className="w-4 h-4 text-amber-600" />
+                <span className="font-bold text-sm text-neon-amber flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-neon-amber" />
                   SIMULATION MODE
                 </span>
-                {mode === 'SIMULATION' && <CheckCircle2 className="w-4 h-4 text-amber-600" />}
+                {mode === 'SIMULATION' && <CheckCircle2 className="w-4 h-4 text-neon-amber" />}
               </div>
-              <p className="text-xs text-charcoal-muted leading-relaxed">
-                Runs locally inside browser localStorage. Deterministic emulation of sensors, motor progress, and audit logs. Zero cloud setup required.
+              <p className="text-xs text-cyber-muted font-sans leading-relaxed">
+                Runs locally inside browser localStorage. Deterministic emulation of sensors, motor progress, and audit logs. Zero cloud credentials required.
               </p>
             </button>
 
             <button
               type="button"
               onClick={() => setMode('AWS')}
-              className={`p-4 rounded-xl border text-left transition-all ${
+              className={`p-4 rounded-xl border text-left transition-all font-mono ${
                 mode === 'AWS'
-                  ? 'bg-emerald-50 border-emerald-600 ring-1 ring-emerald-600'
-                  : 'bg-white border-charcoal-border hover:bg-paper-100'
+                  ? 'bg-neon-cyan/10 border-neon-cyan shadow-neon-cyan text-cyber-text'
+                  : 'bg-cyber-card border-cyber-border text-cyber-muted hover:text-cyber-text hover:border-cyber-border/80'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-bold text-sm text-charcoal flex items-center gap-2">
-                  <Cloud className="w-4 h-4 text-emerald-700" />
+                <span className="font-bold text-sm text-neon-cyan flex items-center gap-2">
+                  <Cloud className="w-4 h-4 text-neon-cyan" />
                   AWS CLOUD MODE
                 </span>
-                {mode === 'AWS' && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+                {mode === 'AWS' && <CheckCircle2 className="w-4 h-4 text-neon-cyan" />}
               </div>
-              <p className="text-xs text-charcoal-muted leading-relaxed">
+              <p className="text-xs text-cyber-muted font-sans leading-relaxed">
                 Connects to live backend API Gateway & AWS Lambda microservice. Records transactions directly into Amazon DynamoDB tables.
               </p>
             </button>
@@ -164,47 +165,47 @@ export const SettingsPage: React.FC = () => {
 
         {/* Backend API Base URL */}
         <div className="space-y-2">
-          <label className="block text-xs font-mono uppercase font-bold text-charcoal">
-            Backend API Base URL
+          <label className="block text-xs font-mono uppercase font-bold text-cyber-text tracking-wider">
+            BACKEND API BASE URL
           </label>
           <input
             type="url"
             value={baseUrl}
             onChange={e => setBaseUrl(e.target.value)}
             placeholder="http://localhost:4000 or https://xyz.execute-api.ap-south-1.amazonaws.com"
-            className="w-full p-2.5 rounded-lg border border-charcoal-border bg-paper-50 text-xs font-mono focus:outline-none focus:border-forest-deep"
+            className="w-full p-2.5 rounded-lg border border-cyber-border bg-cyber-card text-xs font-mono text-cyber-text focus:outline-none focus:border-neon-cyan"
             required
           />
-          <p className="text-[11px] text-charcoal-muted">
-            Used when in AWS Cloud Mode, or when testing the local Express Node.js server.
+          <p className="text-[11px] text-cyber-muted font-mono">
+            Used when in AWS Cloud Mode, or when testing the local Express Node.js server on port 4000.
           </p>
         </div>
 
         {/* Machine ID */}
         <div className="space-y-2">
-          <label className="block text-xs font-mono uppercase font-bold text-charcoal">
-            Default Machine ID
+          <label className="block text-xs font-mono uppercase font-bold text-cyber-text tracking-wider">
+            DEFAULT MACHINE IDENTIFIER
           </label>
           <input
             type="text"
             value={machineId}
             onChange={e => setMachineId(e.target.value)}
-            className="w-full p-2.5 rounded-lg border border-charcoal-border bg-paper-50 text-xs font-mono focus:outline-none focus:border-forest-deep"
+            className="w-full p-2.5 rounded-lg border border-cyber-border bg-cyber-card text-xs font-mono text-cyber-text focus:outline-none focus:border-neon-cyan"
             required
           />
         </div>
 
         {/* Test Connection Button & Result */}
-        <div className="pt-2 border-t border-charcoal-border space-y-3">
+        <div className="pt-2 border-t border-cyber-border space-y-3 font-mono">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-charcoal-muted">Verify backend connectivity before saving:</span>
+            <span className="text-xs text-cyber-muted">Verify backend connectivity before saving:</span>
             <button
               type="button"
               onClick={handleTestConnection}
               disabled={testResult.testing}
-              className="px-3.5 py-1.5 rounded-lg border border-charcoal-border bg-paper-100 hover:bg-paper-200 text-xs font-mono text-charcoal font-semibold transition-colors"
+              className="px-3.5 py-1.5 rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 hover:bg-neon-cyan/20 text-xs font-mono text-neon-cyan font-bold transition-all"
             >
-              {testResult.testing ? 'Testing...' : 'Test Health Endpoint'}
+              {testResult.testing ? 'TESTING...' : '[ TEST HEALTH ENDPOINT ]'}
             </button>
           </div>
 
@@ -212,8 +213,8 @@ export const SettingsPage: React.FC = () => {
             <div
               className={`p-3 rounded-lg text-xs font-mono border ${
                 testResult.ok
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
-                  : 'bg-red-50 border-red-300 text-red-900'
+                  ? 'bg-neon-green/10 border-neon-green/40 text-neon-green'
+                  : 'bg-neon-red/10 border-neon-red/40 text-neon-red'
               }`}
             >
               {testResult.message}
@@ -222,35 +223,35 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Submit Actions */}
-        <div className="pt-4 border-t border-charcoal-border flex items-center justify-between">
+        <div className="pt-4 border-t border-cyber-border flex items-center justify-between font-mono">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-forest-deep text-white font-bold text-xs shadow-sm hover:bg-forest-card transition-all"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-neon-green text-cyber-bg font-bold text-xs tracking-wider shadow-neon-green hover:bg-neon-green/90 transition-all"
           >
             <Save className="w-4 h-4" />
-            <span>Save Settings</span>
+            <span>[ SAVE CONFIGURATION ]</span>
           </button>
         </div>
       </form>
 
       {/* Demo Reset Card */}
-      <div className="bg-white border border-charcoal-border rounded-xl p-6 space-y-4 shadow-xs">
+      <div className="hud-panel rounded-xl p-6 space-y-4 border border-cyber-border">
         <div className="flex items-center justify-between">
           <div>
-            <h4 className="font-bold text-sm text-charcoal flex items-center gap-2">
-              <RotateCcw className="w-4 h-4 text-forest-deep" />
+            <h4 className="font-bold text-sm text-cyber-text font-mono flex items-center gap-2">
+              <RotateCcw className="w-4 h-4 text-neon-red" />
               Reset Demonstration State
             </h4>
-            <p className="text-xs text-charcoal-muted mt-1">
+            <p className="text-xs text-cyber-muted font-mono mt-1">
               Restores initial seed transactions, resets recycling bin capacity to 28%, and replenishes test food hoppers.
             </p>
           </div>
           <button
             type="button"
             onClick={handleResetDemo}
-            className="px-4 py-2 rounded-lg bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 text-xs font-mono font-bold transition-colors"
+            className="px-4 py-2 rounded-lg bg-neon-red/10 hover:bg-neon-red/20 border border-neon-red/40 text-neon-red text-xs font-mono font-bold transition-colors"
           >
-            Reset Seed Data
+            [ RESET SEED DATA ]
           </button>
         </div>
       </div>

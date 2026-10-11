@@ -72,96 +72,94 @@ export const MachineDiagram: React.FC = () => {
   const [selectedComponent, setSelectedComponent] = useState<ComponentInfo>(HARDWARE_COMPONENTS[0]);
 
   return (
-    <div className="bg-white border border-charcoal-border rounded-xl shadow-sm overflow-hidden">
-      <div className="p-6 border-b border-charcoal-border bg-paper-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="hud-panel rounded-xl shadow-hud-panel overflow-hidden border border-cyber-border">
+      <div className="p-6 border-b border-cyber-border bg-cyber-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
-            <Layers className="w-5 h-5 text-forest-deep" />
+          <h3 className="text-lg font-bold text-cyber-text font-mono flex items-center gap-2">
+            <Layers className="w-5 h-5 text-neon-green" />
             Physical Machine Hardware Architecture
           </h3>
-          <p className="text-xs text-charcoal-muted mt-1">
+          <p className="text-xs text-cyber-muted font-mono mt-1">
             Interactive engineering schematic: Click components below to review sensors, safety interlocks, and fail-safes.
           </p>
         </div>
-        <div className="flex items-center gap-2 text-xs font-mono bg-paper-200 border border-charcoal-border px-3 py-1.5 rounded-lg w-fit">
-          <Shield className="w-4 h-4 text-emerald-600" />
-          <span>Failsafe Interlocks Active</span>
+        <div className="flex items-center gap-2 text-xs font-mono bg-cyber-card border border-neon-green/30 text-neon-green px-3 py-1.5 rounded-lg w-fit">
+          <Shield className="w-4 h-4 text-neon-green" />
+          <span>FAILSAFE INTERLOCKS ACTIVE</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-charcoal-border">
+      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-cyber-border">
         {/* Component Selector List */}
-        <div className="lg:col-span-5 p-4 space-y-2 bg-paper-50 max-h-[460px] overflow-y-auto">
+        <div className="lg:col-span-5 p-4 space-y-2 bg-cyber-surface max-h-[460px] overflow-y-auto">
           {HARDWARE_COMPONENTS.map(comp => {
             const isSelected = selectedComponent.id === comp.id;
             return (
               <button
                 key={comp.id}
                 onClick={() => setSelectedComponent(comp)}
-                className={`w-full text-left p-3.5 rounded-lg border transition-all text-xs flex items-start justify-between gap-3 ${
+                className={`w-full text-left p-3 rounded-lg border transition-all text-xs font-mono flex items-center justify-between ${
                   isSelected
-                    ? 'bg-forest-deep text-white border-forest-deep shadow-sm'
-                    : 'bg-white text-charcoal border-charcoal-border hover:bg-paper-100 hover:border-gray-300'
+                    ? 'bg-neon-green/10 border-neon-green text-cyber-text shadow-neon-green'
+                    : 'bg-cyber-card border-cyber-border text-cyber-muted hover:text-cyber-text hover:border-cyber-border/80'
                 }`}
               >
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-sm">{comp.name}</span>
-                  </div>
-                  <span
-                    className={`inline-block mt-1 text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
-                      isSelected ? 'bg-forest-card text-emerald-200' : 'bg-paper-200 text-charcoal-muted'
-                    }`}
-                  >
-                    {comp.category}
-                  </span>
+                  <span className="font-bold text-xs block text-cyber-text">{comp.name}</span>
+                  <span className="text-[10px] text-cyber-muted uppercase mt-0.5 block">{comp.category}</span>
                 </div>
-                {isSelected ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" />
-                ) : (
-                  <Activity className="w-4 h-4 text-charcoal-muted shrink-0 mt-0.5 opacity-40" />
-                )}
+                <span
+                  className={`text-[9px] px-2 py-0.5 rounded font-bold uppercase border ${
+                    comp.category === 'Sensors'
+                      ? 'bg-neon-cyan/10 text-neon-cyan border-neon-cyan/30'
+                      : comp.category === 'Mechanics'
+                        ? 'bg-neon-amber/10 text-neon-amber border-neon-amber/30'
+                        : comp.category === 'Dispensing'
+                          ? 'bg-neon-green/10 text-neon-green border-neon-green/30'
+                          : 'bg-neon-purple/10 text-neon-purple border-neon-purple/30'
+                  }`}
+                >
+                  {comp.category}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Selected Component Technical Detail Card */}
-        <div className="lg:col-span-7 p-6 space-y-5 bg-white">
-          <div className="flex items-start justify-between gap-4">
+        {/* Selected Component Inspection Pane */}
+        <div className="lg:col-span-7 p-6 space-y-5 bg-cyber-bg">
+          <div className="border-b border-cyber-border pb-3 flex items-center justify-between">
             <div>
-              <span className="text-xs font-mono text-emerald-800 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                {selectedComponent.category} Specification
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan block">
+                // COMPONENT SCHEMATIC
               </span>
-              <h4 className="text-xl font-bold text-charcoal mt-2">{selectedComponent.name}</h4>
+              <h4 className="text-lg font-bold text-cyber-text font-mono mt-0.5">
+                {selectedComponent.name}
+              </h4>
             </div>
-            <Cpu className="w-8 h-8 text-forest-deep opacity-30 shrink-0" />
+            <span className="text-xs font-mono px-2 py-1 rounded bg-cyber-card border border-cyber-border text-neon-green">
+              {selectedComponent.category}
+            </span>
           </div>
 
-          <p className="text-sm text-charcoal leading-relaxed">
+          <p className="text-xs text-cyber-muted font-sans leading-relaxed">
             {selectedComponent.description}
           </p>
 
-          <div className="space-y-3 pt-2">
-            <div className="p-3.5 rounded-lg bg-paper-100 border border-charcoal-border text-xs">
-              <span className="font-semibold text-charcoal block mb-1">Hardware & Sensor Implementation:</span>
-              <p className="text-charcoal-muted font-mono leading-relaxed">{selectedComponent.hardwareSpecs}</p>
+          <div className="space-y-3 text-xs font-mono">
+            <div className="p-3.5 rounded-lg bg-cyber-card border border-cyber-border space-y-1">
+              <span className="font-bold text-neon-cyan block text-[11px]">// HARDWARE & ELECTRICAL SPECIFICATIONS</span>
+              <p className="text-[11px] text-cyber-muted font-sans">{selectedComponent.hardwareSpecs}</p>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-950">
-              <span className="font-semibold block mb-1 flex items-center gap-1.5 text-emerald-900">
-                <Shield className="w-3.5 h-3.5 text-emerald-700" />
-                Physical Safety Interlock:
-              </span>
-              <p className="leading-relaxed">{selectedComponent.safetyInterlock}</p>
+            <div className="p-3.5 rounded-lg bg-cyber-card border border-cyber-border space-y-1">
+              <span className="font-bold text-neon-green block text-[11px]">// SAFETY INTERLOCK & OPERATIONAL BOUNDARIES</span>
+              <p className="text-[11px] text-cyber-muted font-sans">{selectedComponent.safetyInterlock}</p>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-950">
-              <span className="font-semibold block mb-1 flex items-center gap-1.5 text-amber-900">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-700" />
-                Sensor Fault & Jam Recovery:
-              </span>
-              <p className="leading-relaxed">{selectedComponent.failureHandling}</p>
+            <div className="p-3.5 rounded-lg bg-cyber-card border border-cyber-border space-y-1">
+              <span className="font-bold text-neon-amber block text-[11px]">// SENSOR DRIFT & FAILURE RECOVERY</span>
+              <p className="text-[11px] text-cyber-muted font-sans">{selectedComponent.failureHandling}</p>
             </div>
           </div>
         </div>

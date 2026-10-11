@@ -264,7 +264,18 @@ recycle2feed/
 
 ---
 
-## 11. Licence & Credits
+---
+
+## 11. AI Tools Disclosure (Rule 03 Compliance)
+
+Per hackathon Rule 03 (*"You can use AI coding tools. List the ones you used in your writeup."*):
+* **Antigravity AI (Google DeepMind):** Used as the primary pair-programming agent for full-stack code scaffolding, AWS SAM template generation, TypeScript Lambda implementation, React HUD components, and Vitest test suite authoring.
+* **Gemini 3.1 & Claude Sonnet:** Used for code review, accessibility enhancements, and bilingual English/Hindi wording.
+* **Student Team Authorship:** System conception, IoT hardware sensor selection, AWS idempotency architecture, food-safety isolation protocols, and the BBA circular economy unit economics model were authored by the human builder.
+
+---
+
+## 12. Licence & Credits
 
 Built with care for the **Bharat Builds Tour / Environmental Hacks 2026** by WeMakeDevs & AWS.  
-Open-source under the MIT Licence.
+Open-source under the [MIT Licence](LICENSE).

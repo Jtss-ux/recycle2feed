@@ -14,7 +14,10 @@ import {
   Clock,
   ShieldCheck,
   Activity,
-  Heart
+  Heart,
+  Terminal,
+  Layers,
+  Settings
 } from 'lucide-react';
 
 export const OperatorPage: React.FC = () => {
@@ -66,43 +69,43 @@ export const OperatorPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
-      <div className="border-b border-charcoal-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="border-b border-cyber-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-forest-deep bg-forest-50 px-2.5 py-0.5 rounded border border-forest-200">
-              Field Operations
+            <span className="text-[10px] font-mono uppercase tracking-widest text-neon-amber bg-neon-amber/10 px-2.5 py-0.5 rounded border border-neon-amber/30">
+              // FIELD OPERATIONS HUD
             </span>
-            <span className="text-xs font-mono text-charcoal-muted">
-              Station ID: {settings.defaultMachineId}
+            <span className="text-xs font-mono text-cyber-muted">
+              STATION ID: <strong className="text-neon-cyan">{settings.defaultMachineId}</strong>
             </span>
           </div>
-          <h2 className="text-3xl font-extrabold text-charcoal tracking-tight mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-cyber-text tracking-tight mt-1 font-mono">
             Operator & Caretaker Console
           </h2>
-          <p className="text-sm text-charcoal-muted mt-1">
+          <p className="text-xs text-cyber-muted font-mono mt-1">
             Manage kiosk physical health, monitor compartment capacities, replenish animal feed, and log field servicing.
           </p>
         </div>
 
         <button
           onClick={refreshData}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-charcoal-border bg-white hover:bg-paper-100 text-xs font-mono text-charcoal transition-colors self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 hover:bg-neon-cyan/20 text-xs font-mono text-neon-cyan font-bold transition-all shadow-neon-cyan self-start sm:self-auto"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-forest-deep" />
-          <span>Refresh Live Telemetry</span>
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>[ REFRESH TELEMETRY ]</span>
         </button>
       </div>
 
       {/* Active Fault Alerts */}
       {machine && machine.activeFaults.length > 0 && (
-        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-5 flex items-start gap-4 text-red-950">
-          <AlertTriangle className="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
+        <div className="bg-neon-red/10 border-2 border-neon-red/50 rounded-xl p-5 flex items-start gap-4 text-cyber-text font-mono text-xs">
+          <AlertTriangle className="w-6 h-6 text-neon-red shrink-0 mt-0.5 animate-bounce" />
           <div className="space-y-1">
-            <h4 className="font-bold text-sm">Critical Machine Faults Detected</h4>
-            <p className="text-xs leading-relaxed">
-              Fault Code: <code className="font-mono font-bold">{machine.activeFaults.join(', ')}</code>. The intake slot compactor shutter is mechanically locked to prevent hazard. Please inspect and record a "JAM RESOLUTION" action below to clear the safety lock.
+            <h4 className="font-bold text-sm text-neon-red">Critical Machine Faults Detected</h4>
+            <p className="text-xs leading-relaxed text-cyber-muted font-sans">
+              Fault Code: <code className="font-mono font-bold text-neon-red">{machine.activeFaults.join(', ')}</code>. The intake slot compactor shutter is mechanically locked to prevent hazard. Please inspect and record a "JAM RESOLUTION" action below to clear the safety lock.
             </p>
           </div>
         </div>
@@ -111,17 +114,17 @@ export const OperatorPage: React.FC = () => {
       {/* Machine Status Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: Machine Core Telemetry */}
-        <div className="bg-white border border-charcoal-border rounded-xl p-6 space-y-4 shadow-xs">
-          <div className="flex items-center justify-between border-b border-charcoal-border pb-3">
-            <span className="font-bold text-sm text-charcoal flex items-center gap-2">
-              <Activity className="w-4 h-4 text-forest-deep" />
+        <div className="hud-panel rounded-xl p-6 space-y-4 border-t-2 border-t-neon-green/80">
+          <div className="flex items-center justify-between border-b border-cyber-border pb-3">
+            <span className="font-bold text-sm text-cyber-text font-mono flex items-center gap-2">
+              <Activity className="w-4 h-4 text-neon-green" />
               Machine Telemetry
             </span>
             <span
-              className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
+              className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase border ${
                 machine?.onlineStatus === 'ONLINE'
-                  ? 'bg-emerald-100 text-emerald-800'
-                  : 'bg-red-100 text-red-800'
+                  ? 'bg-neon-green/10 text-neon-green border-neon-green/30'
+                  : 'bg-neon-red/10 text-neon-red border-neon-red/30'
               }`}
             >
               {machine?.onlineStatus ?? 'ONLINE'}
@@ -129,60 +132,60 @@ export const OperatorPage: React.FC = () => {
           </div>
 
           <div className="space-y-2 text-xs font-mono">
-            <div className="flex justify-between">
-              <span className="text-charcoal-muted">Operating Mode:</span>
-              <span className="font-semibold text-charcoal">{settings.operatingMode}</span>
+            <div className="flex justify-between py-1 border-b border-cyber-border/40">
+              <span className="text-cyber-muted">Operating Mode:</span>
+              <span className="font-bold text-neon-cyan">{settings.operatingMode}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-charcoal-muted">Last Heartbeat:</span>
-              <span className="text-charcoal">
+            <div className="flex justify-between py-1 border-b border-cyber-border/40">
+              <span className="text-cyber-muted">Last Heartbeat:</span>
+              <span className="text-cyber-text">
                 {machine ? new Date(machine.lastHeartbeatAt).toLocaleTimeString() : 'Just now'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-charcoal-muted">Last Maintenance:</span>
-              <span className="text-charcoal">
+            <div className="flex justify-between py-1 border-b border-cyber-border/40">
+              <span className="text-cyber-muted">Last Maintenance:</span>
+              <span className="text-cyber-text">
                 {machine ? new Date(machine.lastMaintenanceAt).toLocaleDateString() : 'N/A'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-charcoal-muted">Safety Cooldown:</span>
-              <span className="text-charcoal">{machine?.cooldownSeconds ?? 5} seconds</span>
+            <div className="flex justify-between py-1">
+              <span className="text-cyber-muted">Safety Cooldown:</span>
+              <span className="text-neon-amber font-bold">{machine?.cooldownSeconds ?? 5} seconds</span>
             </div>
           </div>
         </div>
 
         {/* Card 2: Recycling Bin Capacity */}
-        <div className="bg-white border border-charcoal-border rounded-xl p-6 space-y-4 shadow-xs">
-          <div className="flex items-center justify-between border-b border-charcoal-border pb-3">
-            <span className="font-bold text-sm text-charcoal flex items-center gap-2">
-              <Trash2 className="w-4 h-4 text-emerald-600" />
+        <div className="hud-panel rounded-xl p-6 space-y-4 border-t-2 border-t-neon-cyan/80">
+          <div className="flex items-center justify-between border-b border-cyber-border pb-3">
+            <span className="font-bold text-sm text-cyber-text font-mono flex items-center gap-2">
+              <Trash2 className="w-4 h-4 text-neon-cyan" />
               Recycling Bin Capacity
             </span>
-            <span className="text-xs font-mono font-bold text-charcoal">
+            <span className="text-xs font-mono font-bold text-neon-cyan">
               {machine?.recyclingBinFillPercent ?? 28}% Full
             </span>
           </div>
 
           <div className="space-y-2">
-            <div className="w-full bg-paper-200 h-4 rounded-full overflow-hidden border border-charcoal-border">
+            <div className="w-full bg-cyber-card h-4 rounded-full overflow-hidden border border-cyber-border">
               <div
                 className={`h-full rounded-full transition-all duration-500 ${
                   (machine?.recyclingBinFillPercent ?? 0) >= 90
-                    ? 'bg-red-500'
+                    ? 'bg-neon-red shadow-neon-red'
                     : (machine?.recyclingBinFillPercent ?? 0) >= 70
-                      ? 'bg-amber-500'
-                      : 'bg-emerald-600'
+                      ? 'bg-neon-amber shadow-neon-amber'
+                      : 'bg-neon-green shadow-neon-green'
                 }`}
                 style={{ width: `${machine?.recyclingBinFillPercent ?? 28}%` }}
               ></div>
             </div>
-            <div className="flex justify-between text-[11px] text-charcoal-muted font-mono pt-1">
-              <span>0% (Empty)</span>
-              <span>Lockout Threshold: 95%</span>
+            <div className="flex justify-between text-[11px] text-cyber-muted font-mono pt-1">
+              <span>0% (EMPTY)</span>
+              <span className="text-neon-amber">LOCKOUT THRESHOLD: 95%</span>
             </div>
             {(machine?.recyclingBinFillPercent ?? 0) >= 90 && (
-              <p className="text-xs text-red-600 font-medium pt-1">
+              <p className="text-xs text-neon-red font-mono pt-1">
                 ⚠️ Warning: Bin nearing full capacity. Schedule municipal emptying soon.
               </p>
             )}
@@ -190,24 +193,24 @@ export const OperatorPage: React.FC = () => {
         </div>
 
         {/* Card 3: Food Hopper Inventory Gauges */}
-        <div className="bg-white border border-charcoal-border rounded-xl p-6 space-y-4 shadow-xs">
-          <div className="flex items-center justify-between border-b border-charcoal-border pb-3">
-            <span className="font-bold text-sm text-charcoal flex items-center gap-2">
-              <Heart className="w-4 h-4 text-emerald-600" />
+        <div className="hud-panel rounded-xl p-6 space-y-4 border-t-2 border-t-neon-amber/80">
+          <div className="flex items-center justify-between border-b border-cyber-border pb-3">
+            <span className="font-bold text-sm text-cyber-text font-mono flex items-center gap-2">
+              <Heart className="w-4 h-4 text-neon-amber" />
               Food Hoppers
             </span>
-            <span className="text-xs font-mono text-charcoal-muted">Remaining (Grams)</span>
+            <span className="text-xs font-mono text-cyber-muted">Remaining (Grams)</span>
           </div>
 
           <div className="space-y-3 text-xs font-mono">
             <div>
               <div className="flex justify-between text-[11px] mb-1">
-                <span>Dog Kibble Hopper</span>
-                <span className="font-bold">{machine?.foodInventoryGrams.DOG_FEED ?? 1850}g / 3000g</span>
+                <span className="text-cyber-muted">Dog Kibble Hopper</span>
+                <span className="font-bold text-neon-green">{machine?.foodInventoryGrams.DOG_FEED ?? 1850}g / 3000g</span>
               </div>
-              <div className="w-full bg-paper-200 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-cyber-card h-2 rounded-full overflow-hidden border border-cyber-border">
                 <div
-                  className="bg-forest-deep h-full rounded-full"
+                  className="bg-neon-green h-full rounded-full"
                   style={{ width: `${Math.min(100, ((machine?.foodInventoryGrams.DOG_FEED ?? 1850) / 3000) * 100)}%` }}
                 ></div>
               </div>
@@ -215,12 +218,12 @@ export const OperatorPage: React.FC = () => {
 
             <div>
               <div className="flex justify-between text-[11px] mb-1">
-                <span>Cat Food Hopper</span>
-                <span className="font-bold">{machine?.foodInventoryGrams.CAT_FEED ?? 900}g / 2000g</span>
+                <span className="text-cyber-muted">Cat Food Hopper</span>
+                <span className="font-bold text-neon-cyan">{machine?.foodInventoryGrams.CAT_FEED ?? 900}g / 2000g</span>
               </div>
-              <div className="w-full bg-paper-200 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-cyber-card h-2 rounded-full overflow-hidden border border-cyber-border">
                 <div
-                  className="bg-emerald-600 h-full rounded-full"
+                  className="bg-neon-cyan h-full rounded-full"
                   style={{ width: `${Math.min(100, ((machine?.foodInventoryGrams.CAT_FEED ?? 900) / 2000) * 100)}%` }}
                 ></div>
               </div>
@@ -228,12 +231,12 @@ export const OperatorPage: React.FC = () => {
 
             <div>
               <div className="flex justify-between text-[11px] mb-1">
-                <span>Wild Bird Grain</span>
-                <span className="font-bold">{machine?.foodInventoryGrams.BIRD_FEED ?? 600}g / 1000g</span>
+                <span className="text-cyber-muted">Wild Bird Grain</span>
+                <span className="font-bold text-neon-amber">{machine?.foodInventoryGrams.BIRD_FEED ?? 600}g / 1000g</span>
               </div>
-              <div className="w-full bg-paper-200 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-cyber-card h-2 rounded-full overflow-hidden border border-cyber-border">
                 <div
-                  className="bg-teal-500 h-full rounded-full"
+                  className="bg-neon-amber h-full rounded-full"
                   style={{ width: `${Math.min(100, ((machine?.foodInventoryGrams.BIRD_FEED ?? 600) / 1000) * 100)}%` }}
                 ></div>
               </div>
@@ -243,101 +246,115 @@ export const OperatorPage: React.FC = () => {
       </div>
 
       {/* Operator Servicing Action Form */}
-      <div className="bg-white border border-charcoal-border rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
-        <div className="border-b border-charcoal-border pb-4">
-          <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
-            <Wrench className="w-5 h-5 text-forest-deep" />
+      <div className="hud-panel rounded-xl p-6 sm:p-8 space-y-6">
+        <div className="border-b border-cyber-border pb-4">
+          <h3 className="text-lg font-bold text-cyber-text font-mono flex items-center gap-2">
+            <Wrench className="w-5 h-5 text-neon-green" />
             Log Field Maintenance & Servicing Action
           </h3>
-          <p className="text-xs text-charcoal-muted mt-1">
-            Authorized record submitted by caretakers, cleaning staff, or technicians.
+          <p className="text-xs text-cyber-muted font-mono mt-1">
+            Recorded directly to DynamoDB / Local Maintenance Audit Ledger with caretaker attribution.
           </p>
         </div>
 
         {successMessage && (
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+          <div className="bg-neon-green/10 border border-neon-green/40 rounded-lg p-4 flex items-center gap-3 text-neon-green text-xs font-mono">
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>{successMessage}</span>
           </div>
         )}
 
-        <form onSubmit={handleRecordMaintenance} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-mono uppercase font-bold text-charcoal mb-2">
-                Maintenance Action Type
-              </label>
+        <form onSubmit={handleRecordMaintenance} className="space-y-4 text-xs font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="font-bold text-cyber-text block uppercase">Action Category</label>
               <select
                 value={actionType}
                 onChange={e => setActionType(e.target.value as MaintenanceActionType)}
-                className="w-full p-2.5 rounded-lg border border-charcoal-border bg-paper-50 text-xs font-sans focus:outline-none focus:border-forest-deep"
+                className="w-full p-2.5 rounded-lg border border-cyber-border bg-cyber-card text-cyber-text focus:outline-none focus:border-neon-green font-mono"
               >
-                <option value="BIN_EMPTYING">Waste Bin Emptying (Resets Bin Fill to 0%)</option>
-                <option value="FEED_REPLENISHMENT">Feed Replenishment (Restocks Food Hoppers)</option>
-                <option value="JAM_RESOLUTION">Jam Resolution (Clears Motor Jam Fault)</option>
-                <option value="CLEANING">Sanitization & Chute Cleaning</option>
-                <option value="SENSOR_INSPECTION">Sensor Inspection & Calibration</option>
-                <option value="DISPENSER_INSPECTION">Dispenser Mechanism Check</option>
-                <option value="GENERAL_MAINTENANCE">General Scheduled Servicing</option>
+                <option value="BIN_EMPTYING">Bin Emptying (Resets capacity to 0%)</option>
+                <option value="FEED_REPLENISHMENT">Feed Replenishment (+1500g kibble inventory)</option>
+                <option value="SANITIZATION">Sanitization & Disinfection</option>
+                <option value="JAM_CLEARANCE">Clear Compactor / Dispenser Jam</option>
+                <option value="INSPECTION">General Mechanical Inspection</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-xs font-mono uppercase font-bold text-charcoal mb-2">
-                Operator Service Note
-              </label>
+            <div className="space-y-2">
+              <label className="font-bold text-cyber-text block uppercase">Operator / Caretaker Identifier</label>
               <input
                 type="text"
-                placeholder="e.g., Emptied 45 PET bottles, wiped down intake slot..."
-                value={operatorNote}
-                onChange={e => setOperatorNote(e.target.value)}
-                className="w-full p-2.5 rounded-lg border border-charcoal-border bg-paper-50 text-xs font-sans focus:outline-none focus:border-forest-deep"
-                required
+                disabled
+                value="Caretaker-DTU-Zone-North"
+                className="w-full p-2.5 rounded-lg border border-cyber-border bg-cyber-surface text-cyber-muted font-mono"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-[11px] text-charcoal-muted">
-              * Action will be immutably recorded in DynamoDB Maintenance table and update machine state.
-            </span>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-6 py-2.5 rounded-xl bg-forest-deep text-white font-bold text-xs shadow-sm hover:bg-forest-card transition-all disabled:opacity-50"
-            >
-              {isSubmitting ? 'Recording Action...' : 'Save Maintenance Log'}
-            </button>
+          <div className="space-y-2">
+            <label className="font-bold text-cyber-text block uppercase">Servicing Notes & Observations</label>
+            <textarea
+              rows={3}
+              value={operatorNote}
+              onChange={e => setOperatorNote(e.target.value)}
+              placeholder="e.g. Cleared 14.2kg crushed PET from bin. Inspected auger gears. Replenished 1.5kg pedigree kibble into dog hopper."
+              className="w-full p-3 rounded-lg border border-cyber-border bg-cyber-card text-cyber-text focus:outline-none focus:border-neon-green font-mono text-xs placeholder:text-cyber-muted"
+            />
           </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-3 rounded-lg bg-neon-green text-cyber-bg font-bold font-mono text-xs tracking-wider shadow-neon-green hover:bg-neon-green/90 transition-all disabled:opacity-50"
+          >
+            {isSubmitting ? 'RECORDING AUDIT ENTRY...' : '[ COMMIT MAINTENANCE RECORD TO LEDGER ]'}
+          </button>
         </form>
       </div>
 
       {/* Maintenance History Audit Log */}
-      <div className="bg-white border border-charcoal-border rounded-xl shadow-sm p-6 space-y-4">
-        <h3 className="font-bold text-sm text-charcoal">Historical Maintenance Audit Trail</h3>
+      <div className="hud-panel rounded-xl overflow-hidden p-6 space-y-4">
+        <div className="border-b border-cyber-border pb-3 flex items-center justify-between">
+          <h3 className="font-bold text-sm font-mono text-cyber-text tracking-wider">
+            // FIELD MAINTENANCE AUDIT HISTORY
+          </h3>
+          <span className="text-xs font-mono text-cyber-muted">{maintenanceLogs.length} Records</span>
+        </div>
 
-        <div className="divide-y divide-charcoal-border">
-          {maintenanceLogs.length === 0 ? (
-            <p className="py-4 text-xs text-charcoal-muted font-mono">No maintenance records logged yet.</p>
-          ) : (
-            maintenanceLogs.map(log => (
-              <div key={log.maintenanceId} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-charcoal font-mono uppercase bg-paper-200 px-2 py-0.5 rounded text-[10px]">
-                      {log.actionType.replace('_', ' ')}
-                    </span>
-                    <span className="text-charcoal-muted text-[11px] font-mono">ID: {log.maintenanceId}</span>
-                  </div>
-                  <p className="text-charcoal leading-relaxed">{log.operatorNote}</p>
-                </div>
-                <div className="text-right text-[11px] text-charcoal-muted font-mono shrink-0">
-                  <p>{new Date(log.createdAt).toLocaleDateString()}</p>
-                  <p>{new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                </div>
-              </div>
-            ))
-          )}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs font-mono">
+            <thead>
+              <tr className="bg-cyber-surface text-cyber-muted uppercase tracking-wider text-[11px] border-b border-cyber-border">
+                <th className="py-2.5 px-3">Log Ref</th>
+                <th className="py-2.5 px-3">Action Type</th>
+                <th className="py-2.5 px-3">Operator Notes</th>
+                <th className="py-2.5 px-3">Operator ID</th>
+                <th className="py-2.5 px-3">Timestamp</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-cyber-border/40">
+              {maintenanceLogs.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-cyber-muted">
+                    No maintenance records found. Submit a servicing action above.
+                  </td>
+                </tr>
+              ) : (
+                maintenanceLogs.map(log => (
+                  <tr key={log.maintenanceId} className="hover:bg-cyber-card/60 transition-colors">
+                    <td className="py-2.5 px-3 font-bold text-neon-cyan">{log.maintenanceId}</td>
+                    <td className="py-2.5 px-3 text-neon-green font-bold">{log.actionType.replace('_', ' ')}</td>
+                    <td className="py-2.5 px-3 text-cyber-text font-sans">{log.operatorNote}</td>
+                    <td className="py-2.5 px-3 text-cyber-muted">{log.machineId}</td>
+                    <td className="py-2.5 px-3 text-cyber-muted">
+                      {new Date(log.createdAt).toLocaleString()}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

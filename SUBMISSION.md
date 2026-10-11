@@ -84,3 +84,14 @@ Deploying physical ReCycle2Feed kiosks on campuses and municipal transit centers
 1. **Recycled Material Offtake:** Aggregated, crushed PET #1 and aluminium cans command high scrap value from licensed circular recyclers.
 2. **Corporate CSR & Brand Sponsorship:** Pet food brands and consumer brands sponsor kiosk construction and animal kibble inventory in exchange on on-kiosk sponsorship branding.
 3. **Campus Sustainability Grants:** University environmental funds offset electricity and caretaker servicing costs.
+
+---
+
+## 7. AI Tools Disclosure (Rule 03 Compliance)
+
+Per hackathon Rule 03 (*"You can use AI coding tools. List the ones you used in your writeup."*), we maintain complete ethical and technical transparency about the AI tools used during the creation of ReCycle2Feed:
+
+* **Primary AI Coding Assistant:** **Antigravity AI (Google DeepMind)** — Used for pair-programming, TypeScript backend structure, AWS SAM template generation, and Vitest test suite authoring.
+* **Secondary Model Refinements:** **Gemini 3.1 Pro & Flash, Claude Sonnet 4.6** — Used for code reviews, accessibility improvements, and bilingual English/Hindi wording.
+* **Student & Team Ownership:** The original concept, sensor architecture (optical ToF + inductive metal + load cells), physical safety interlocks (motor stall reverse), BBA circular economy unit economics model, and ethical disclosures were designed and authored by the team. No live data or hardware is fabricated.
+

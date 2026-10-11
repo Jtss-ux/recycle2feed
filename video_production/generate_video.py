@@ -14,37 +14,37 @@ OUTPUT_VIDEO = os.path.join(PROJECT_ROOT, 'recycle2feed_demo_video.mp4')
 SCENES = [
     {
         "id": "scene_01",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/",
         "text": "Welcome to ReCycle2Feed, built for the Bharat Builds Tour Environmental Hacks in the Waste and Energy track. Across Indian cities and campuses, millions of recyclable plastic bottles and cans end up in mixed garbage because conventional bins offer zero incentive. At the same time, community animals face irregular, unmonitored feeding. ReCycle2Feed connects source-segregated recycling directly with community animal welfare."
     },
     {
         "id": "scene_02",
-        "url": "http://localhost:4173/kiosk",
+        "url": "http://localhost:4173/#/kiosk",
         "text": "This is our smart recycling kiosk. A user deposits an eligible PET bottle or aluminium can into the intake slot. Dual sensors verify the material, internal compactors crush the container, and our AWS Lambda microservice authorizes a metered portion of animal feed into a sheltered bowl. Notice our persistent Mode Indicator: all simulated actions are strictly labeled for complete integrity."
     },
     {
         "id": "scene_03",
-        "url": "http://localhost:4173/kiosk",
+        "url": "http://localhost:4173/#/kiosk",
         "text": "Here, we simulate depositing an eligible 28 gram PET beverage bottle and select the Community Dog Feeding hopper. The kiosk validates material geometry, verifies unique event idempotency, and dispenses a calibrated 20 gram portion of kibble. An immutable digital receipt is generated with server-verified timestamps and full event reference."
     },
     {
         "id": "scene_04",
-        "url": "http://localhost:4173/kiosk",
+        "url": "http://localhost:4173/#/kiosk",
         "text": "We never fabricate success. If someone deposits a glass container or hazardous e-waste, the compactor safety check rejects it with a clear plain-English explanation. If the food hopper runs empty, the bottle is collected for recycling, but the system honestly reports that dispensing failed and alerts campus caretakers."
     },
     {
         "id": "scene_05",
-        "url": "http://localhost:4173/impact",
+        "url": "http://localhost:4173/#/impact",
         "text": "Our Impact Dashboard provides an auditable environmental ledger. Instead of arbitrary carbon formulas, we track actual measured mass in kilograms. Our Unit Economics model proves circular feasibility: crushed PET scrap yields 38 rupees per kilo, offsetting the 1 rupee 70 paise wholesale feed portion."
     },
     {
         "id": "scene_06",
-        "url": "http://localhost:4173/operator",
+        "url": "http://localhost:4173/#/operator",
         "text": "On the Operator Console, field caretakers monitor recycling bin fill capacity with a 95 percent safety lockout threshold, inspect food hopper levels, clear mechanical motor jams, and record field sanitization actions."
     },
     {
         "id": "scene_07",
-        "url": "http://localhost:4173/how-it-works",
+        "url": "http://localhost:4173/#/how-it-works",
         "text": "Under the hood, ReCycle2Feed is built with AWS SAM, deploying Amazon API Gateway HTTP API, AWS Lambda on ARM64 Graviton, and Amazon DynamoDB with conditional writes to prevent double-rewarding. All 14 automated unit tests pass. ReCycle2Feed: Turning waste into care. Thank you."
     }
 ]

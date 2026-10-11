@@ -14,7 +14,7 @@ export const App: React.FC = () => {
   return (
     <AppProvider>
       <HashRouter>
-        <div className="min-h-screen flex flex-col bg-paper text-charcoal">
+        <div className="min-h-screen flex flex-col bg-cyber-bg text-cyber-text cyber-grid selection:bg-neon-green/20 selection:text-neon-green">
           <Navbar />
           <main className="flex-1">
             <Routes>
