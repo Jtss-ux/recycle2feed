@@ -135,8 +135,7 @@ AWS Cloud Services:
 ```
 * **Blog links:**
 ```
-https://builder.aws.com/create/content?trk=0b623e51-59b3-49a1-a76e-7d43b0f10785&sc_channel=el
-(Publish the pre-authored article located at docs/aws-builder-center-blog.md on AWS Builder Center and paste your live article link here to win AirPods 5!)
+https://builder.aws.com/content/3KYTgXYwsU6xOllBgPyOJHJEWrx/building-an-idempotent-serverless-reverse-vending-kiosk-for-campus-recycling-on-aws
 ```
 * **Team leader's contributions:**
 ```
