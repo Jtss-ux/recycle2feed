@@ -27,7 +27,10 @@ import {
   Terminal,
   Activity,
   Zap,
-  ShieldCheck
+  ShieldCheck,
+  Mic,
+  MicOff,
+  Radio
 } from 'lucide-react';
 
 export const KioskPage: React.FC = () => {
@@ -72,7 +75,19 @@ export const KioskPage: React.FC = () => {
   };
 
   // Step 2 -> 3 -> 4: Submit item and run simulated dispensing sequence
-  const handleStartRecycling = async () => {
+  const handleStartRecycling = async (
+    overrideItem?: ItemType,
+    overrideModule?: BeneficiaryModule,
+    overrideWeight?: number
+  ) => {
+    const itemToUse = overrideItem || selectedItem;
+    const moduleToUse = overrideModule || selectedModule;
+    const weightToUse = overrideWeight || measuredWeight;
+
+    if (overrideItem) setSelectedItem(overrideItem);
+    if (overrideModule) setSelectedModule(overrideModule);
+    if (overrideWeight) setMeasuredWeight(overrideWeight);
+
     setIsProcessing(true);
     setCurrentStep(3);
     setErrorNotice(null);
@@ -87,10 +102,10 @@ export const KioskPage: React.FC = () => {
       const response = await ApiClient.createTransaction({
         eventId,
         machineId: settings.defaultMachineId,
-        itemType: selectedItem,
-        beneficiaryModule: selectedModule,
+        itemType: itemToUse,
+        beneficiaryModule: moduleToUse,
         sensorSource: 'SIMULATOR',
-        measuredWeightGrams: measuredWeight,
+        measuredWeightGrams: weightToUse,
         simulationMode: settings.operatingMode === 'SIMULATION'
       });
 
@@ -311,6 +326,63 @@ export const KioskPage: React.FC = () => {
               </p>
             </div>
 
+            {/* NO-HANDS VOICE INTAKE (WISPR FLOW ACCESSIBILITY) */}
+            <div className="hud-panel border border-neon-cyan/50 rounded-xl p-4 sm:p-5 text-left space-y-3 bg-neon-cyan/5 shadow-neon-cyan">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-neon-cyan/20 pb-2">
+                <div className="flex items-center gap-2">
+                  <Radio className="w-3.5 h-3.5 text-neon-cyan animate-pulse" />
+                  <span className="text-xs font-mono font-bold text-neon-cyan uppercase tracking-wider">
+                    // NO-HANDS ACCESSIBILITY MODE (POWERED BY WISPR FLOW)
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-neon-green bg-neon-green/10 px-2 py-0.5 rounded border border-neon-green/30 font-bold self-start sm:self-auto">
+                  VOICE COMMANDS READY
+                </span>
+              </div>
+
+              <p className="text-xs font-mono text-cyber-muted leading-relaxed">
+                Arms full of PET bottles or cans? Have motor accessibility limitations? Speak your deposit intent naturally (or click a preset below) to trigger instant hands-free sensor verification:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 font-mono text-xs">
+                <button
+                  type="button"
+                  onClick={() => handleStartRecycling('PET_BOTTLE', 'DOG_FEED', 28)}
+                  className="p-3 rounded-lg border border-cyber-border hover:border-neon-cyan bg-cyber-card hover:bg-cyber-surface text-cyber-text text-left transition-all group flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between text-neon-cyan font-bold text-[11px] mb-1">
+                    <span>🎙️ "Deposit bottle for dogs"</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-cyber-muted group-hover:text-neon-cyan group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                  <span className="text-[10px] text-cyber-muted">28g PET Bottle → 20g Dog Kibble</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleStartRecycling('ALUMINIUM_CAN', 'BIRD_FEED', 15)}
+                  className="p-3 rounded-lg border border-cyber-border hover:border-neon-cyan bg-cyber-card hover:bg-cyber-surface text-cyber-text text-left transition-all group flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between text-neon-cyan font-bold text-[11px] mb-1">
+                    <span>🎙️ "Deposit can for birds"</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-cyber-muted group-hover:text-neon-cyan group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                  <span className="text-[10px] text-cyber-muted">15g Aluminium Can → 10g Bird Grain</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleStartRecycling('PET_BOTTLE', 'CAT_FEED', 32)}
+                  className="p-3 rounded-lg border border-cyber-border hover:border-neon-cyan bg-cyber-card hover:bg-cyber-surface text-cyber-text text-left transition-all group flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between text-neon-cyan font-bold text-[11px] mb-1">
+                    <span>🎙️ "Deposit bottle for cats"</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-cyber-muted group-hover:text-neon-cyan group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                  <span className="text-[10px] text-cyber-muted">32g Large Bottle → 15g Cat Feed</span>
+                </button>
+              </div>
+            </div>
+
             {/* Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
@@ -493,7 +565,7 @@ export const KioskPage: React.FC = () => {
               </button>
 
               <button
-                onClick={handleStartRecycling}
+                onClick={() => handleStartRecycling()}
                 className="px-6 py-3 rounded-xl bg-neon-green text-cyber-bg font-mono font-bold text-xs tracking-wider shadow-neon-green hover:bg-neon-green/90 transition-all flex items-center gap-2"
               >
                 <span>CONFIRM & INSERT ITEM</span>

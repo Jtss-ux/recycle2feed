@@ -17,13 +17,16 @@ import {
   Cpu,
   Database,
   ShieldCheck,
-  ExternalLink
+  ExternalLink,
+  Radio,
+  Mic
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showJudgeModal, setShowJudgeModal] = useState(false);
   const [showAiModal, setShowAiModal] = useState(false);
+  const [showWisprModal, setShowWisprModal] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -53,17 +56,23 @@ export const Navbar: React.FC = () => {
             <span className="text-cyber-border">|</span>
             <span>IDEMPOTENCY: DYNAMODB CONDITIONAL</span>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-neon-amber">TOUR '26: EVENT 02 (OCT 8–11)</span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowWisprModal(true)}
+              className="text-neon-cyan hover:underline flex items-center gap-1.5 font-bold bg-neon-cyan/10 px-2 py-0.5 rounded border border-neon-cyan/30"
+            >
+              <Radio className="w-3 h-3 text-neon-cyan animate-pulse" />
+              WISPR NO-HANDS COPILOT
+            </button>
             <span className="text-cyber-border">|</span>
-            <span>TRACK: WASTE & ENERGY</span>
+            <span>TRACK: BUILDERS</span>
             <span className="text-cyber-border">|</span>
             <button
               onClick={() => setShowAiModal(true)}
               className="text-neon-purple hover:underline flex items-center gap-1 font-bold"
             >
               <Bot className="w-3 h-3" />
-              AI ASSISTANCE DISCLOSED
+              AI ASSISTANCE
             </button>
           </div>
         </div>
@@ -421,6 +430,103 @@ export const Navbar: React.FC = () => {
               className="w-full py-3 rounded-xl bg-neon-purple/10 border border-neon-purple text-neon-purple font-bold text-xs hover:bg-neon-purple/20 transition-all font-mono tracking-widest uppercase"
             >
               [ ACKNOWLEDGE DISCLOSURE ]
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Wispr Flow Challenge Modal */}
+      {showWisprModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cyber-bg/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="hud-panel max-w-2xl w-full border-2 border-neon-cyan/80 rounded-2xl p-6 sm:p-8 space-y-6 shadow-neon-cyan max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-cyber-border pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-neon-cyan/10 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan">
+                  <Radio className="w-5 h-5 animate-pulse" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan bg-neon-cyan/10 px-2 py-0.5 rounded border border-neon-cyan/30">
+                    // WEMAKEDEVS × WISPR FLOW
+                  </span>
+                  <h3 className="text-xl font-extrabold text-cyber-text font-mono mt-0.5">
+                    No Hands: The Wispr Challenge
+                  </h3>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowWisprModal(false)}
+                className="p-1 rounded-lg hover:bg-cyber-card text-cyber-muted hover:text-cyber-text transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-4 text-xs font-mono">
+              <div className="p-3.5 rounded-lg bg-cyber-surface border border-cyber-border space-y-1">
+                <span className="text-neon-cyan font-bold block text-sm">
+                  Track 1: Builders (Software Developers)
+                </span>
+                <p className="text-cyber-muted text-xs font-sans leading-relaxed">
+                  "Build it, write it, ship it. Just don't type it." ReCycle2Feed solves the physical barrier in municipal reverse vending and animal feeding by transforming raw spoken field reports into structured Amazon DynamoDB telemetry.
+                </p>
+              </div>
+
+              <div className="space-y-2.5">
+                <h4 className="font-bold text-cyber-text uppercase text-[11px] tracking-wider text-neon-green">
+                  // Core Voice Innovations
+                </h4>
+
+                <div className="p-3.5 rounded-lg bg-cyber-card border border-neon-cyan/30 space-y-1">
+                  <span className="text-neon-cyan font-bold text-xs flex items-center gap-1.5">
+                    <Mic className="w-3.5 h-3.5" />
+                    1. Hands-Free Field Operator Dispatch (/operator)
+                  </span>
+                  <p className="text-cyber-muted text-[11px] font-sans leading-relaxed">
+                    Scrap collectors and caretakers wear thick protective gloves and haul 25kg+ bags of crushed PET scrap. They cannot type on a phone. By holding <code>Fn</code> in Wispr Flow, they speak servicing logs naturally. Our NLP engine extracts metrics, resets full-bin lockouts, and clears motor jams hands-free.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-lg bg-cyber-card border border-neon-green/30 space-y-1">
+                  <span className="text-neon-green font-bold text-xs flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    2. Hands-Free Kiosk Intake Accessibility (/kiosk)
+                  </span>
+                  <p className="text-cyber-muted text-[11px] font-sans leading-relaxed">
+                    Users holding multiple beverage containers or individuals with motor disabilities can speak deposit instructions (e.g. <em>"Deposit PET bottle, feed community dogs"</em>) to launch automated recycling and auger dispensing hands-free.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-lg bg-cyber-card border border-neon-amber/30 space-y-1">
+                  <span className="text-neon-amber font-bold text-xs flex items-center gap-1.5">
+                    <Cpu className="w-3.5 h-3.5" />
+                    3. Spoken Software Architecture & IaC Workflow
+                  </span>
+                  <p className="text-cyber-muted text-[11px] font-sans leading-relaxed">
+                    The entire AWS SAM CloudFormation template (infrastructure/template.yaml), DynamoDB conditional write specifications, and Vitest test scenarios were dictated via Wispr Flow into coding assistants.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-lg bg-neon-cyan/5 border border-neon-cyan/30 flex items-center justify-between">
+                <span className="text-cyber-muted text-[11px]">
+                  Experience the live Voice Dispatcher in action:
+                </span>
+                <Link
+                  to="/operator"
+                  onClick={() => setShowWisprModal(false)}
+                  className="px-3.5 py-1.5 rounded-lg bg-neon-cyan text-cyber-bg font-bold font-mono text-[11px] hover:bg-neon-cyan/90 transition-all flex items-center gap-1"
+                >
+                  <span>OPEN OPERATOR HUD</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowWisprModal(false)}
+              className="w-full py-3 rounded-xl bg-neon-cyan/10 border border-neon-cyan text-neon-cyan font-bold text-xs hover:bg-neon-cyan/20 transition-all font-mono tracking-widest uppercase"
+            >
+              [ CLOSE WISPR CHALLENGE SPEC ]
             </button>
           </div>
         </div>

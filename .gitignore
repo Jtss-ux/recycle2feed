@@ -37,3 +37,7 @@ scratch/
 video_production/*.wav
 video_production/*.png
 video_production/*.mp4
+
+# Firecrawl cache
+.firecrawl/
+
