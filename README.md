@@ -1,18 +1,19 @@
 # ReCycle2Feed — Turn Waste Into Care
 
+[![Wispr Flow](https://img.shields.io/badge/Wispr%20Flow-No--Hands%20Challenge%20(Track%201)-9333EA.svg?logo=soundcharts)](https://www.wemakedevs.org/wispr)
 [![AWS Serverless](https://img.shields.io/badge/AWS-Serverless-orange.svg?logo=amazon-aws)](https://aws.amazon.com)
 [![React 18](https://img.shields.io/badge/Frontend-React%2018%20%2B%20TypeScript-blue.svg?logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF.svg?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Styles-Tailwind%20CSS-38B2AC.svg?logo=tailwind-css)](https://tailwindcss.com/)
 [![Tests](https://img.shields.io/badge/Tests-14%2F14%20Passing-brightgreen.svg)](https://vitest.dev/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success.svg?logo=github)](https://jtss-ux.github.io/recycle2feed/)
-[![Demo Video](https://img.shields.io/badge/Demo%20Video-YouTube-red.svg?logo=youtube)](https://youtu.be/KCqz4FkRvRI)
-[![Tour](https://img.shields.io/badge/Bharat%20Builds%20Tour-Event%2002%3A%20Environmental%20Hacks-forest.svg)](https://www.wemakedevs.org/aws/env)
+[![Spoken Prompts Log](https://img.shields.io/badge/Wispr%20Log-Spoken%20Engineering-blueviolet.svg)](docs/voice-prompts-log.md)
 
-An intelligent, AWS-powered smart reverse-vending and social reward platform designed for the **Waste and Energy** track of the **Bharat Builds Tour / Environmental Hacks 2026** (by WeMakeDevs & AWS).
+An intelligent, AWS-powered smart reverse-vending and social reward platform designed for the **No Hands: The Wispr Challenge** (Track 1: Builders by WeMakeDevs & Wispr Flow) and the **Bharat Builds Tour / Environmental Hacks**.
 
+> 🎙️ **Voice-First Innovation:** Built with **Wispr Flow**. Field caretakers hauling 25kg+ bags of PET scrap log maintenance, clear motor jams, and sync to AWS DynamoDB hands-free using the [No-Hands Operator Console](https://jtss-ux.github.io/recycle2feed/#/operator). See the [Spoken Prompts Log](docs/voice-prompts-log.md).  
 > 🌐 **Interactive Live Web App:** [https://jtss-ux.github.io/recycle2feed/](https://jtss-ux.github.io/recycle2feed/)  
-> 📺 **Watch the 3-Minute Hackathon Demo Video:** [https://youtu.be/KCqz4FkRvRI](https://youtu.be/KCqz4FkRvRI)
+> 📺 **Demo Video Script (≤ 2 Mins):** [docs/wispr-demo-script.md](docs/wispr-demo-script.md)
 
 ---
 
